@@ -1,0 +1,16 @@
+/* index.css */
+
+/**
+ * Tailwind CSS base layer - applies Normalize.css and other base styles
+ */
+@tailwind base;
+
+/**
+ * Tailwind CSS component layer - for prebuilt component classes
+ */
+@tailwind components;
+
+/**
+ * Tailwind CSS utility layer - includes all utility classes like margin, padding, flex, etc.
+ */
+@tailwind utilities;
