@@ -35,7 +35,7 @@ export default function Profile() {
      */
     const fetchProfile = async () => {
         try {
-            const res = await axios.get("http://localhost:5000/api/profile", {
+            const res = await axios.get("https://q1-profiles.onrender.com/api/profile", {
                 headers: { Authorization: localStorage.getItem("token") },
             });
 

@@ -81,7 +81,7 @@ export default function Login() {
 
         try {
             // POST login data to backend
-            const res = await axios.post("http://localhost:5000/api/login", form);
+            const res = await axios.post("https://q1-profiles.onrender.com/api/login", form);
 
             // Save the JWT token in local storage
             localStorage.setItem("token", res.data.token);
