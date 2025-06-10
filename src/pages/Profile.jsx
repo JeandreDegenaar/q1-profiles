@@ -90,7 +90,7 @@ export default function Profile() {
 
         try {
             // Send updated profile data to backend
-            await axios.put("http://localhost:5000/api/profile", form, {
+            await axios.put("https://q1-profiles.onrender.com/api/profile", form, {
                 headers: { Authorization: localStorage.getItem("token") },
             });
 
