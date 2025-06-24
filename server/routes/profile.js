@@ -39,7 +39,6 @@ router.get("/", auth, async (req, res) => {
 router.put("/", auth, async (req, res) => {
     const { username, email, phone, dob } = req.body;
 
-    // Validate all required fields
     if (!username || !email || !phone || !dob) {
         return res.status(400).json({ message: "All fields are required" });
     }
@@ -55,11 +54,19 @@ router.put("/", auth, async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        res.json(updatedUser);
+        // Convert to plain object and remove password
+        const userObj = updatedUser.toObject();
+        delete userObj.password;
+
+        res.json({
+            message: "Profile updated successfully",
+            user: userObj,
+        });
     } catch (err) {
         console.error("❌ Profile update error:", err);
         res.status(500).json({ message: "Failed to update profile" });
     }
 });
+
 
 module.exports = router;
