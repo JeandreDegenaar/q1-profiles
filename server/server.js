@@ -15,6 +15,9 @@ const profileRoutes = require("./routes/profile");
 // Create Express application
 const app = express();
 
+// Define the port (Render sets PORT automatically; default to 5000 locally)
+const PORT = process.env.PORT || 5000;
+
 /**
  * Middleware
  * - Enable CORS for cross-origin requests
@@ -32,11 +35,22 @@ app.use("/api", authRoutes);
 app.use("/api/profile", profileRoutes);
 
 /**
+ * Optional: Health check route to verify server is running
+ */
+app.get("/", (req, res) => {
+    res.send("✅ Server is running");
+});
+
+/**
  * Connect to MongoDB and start the server
- * Logs server URL if successful, logs error otherwise
+ * Logs server port if successful, logs error otherwise
  */
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => app.listen(process.env.PORT, () =>
-        console.log(`✅ Server running on http://localhost:${process.env.PORT}`)
-    ))
-    .catch(err => console.error("❌ MongoDB connection error:", err));
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`✅ Server running on port ${PORT}`);
+        });
+    })
+    .catch(err => {
+        console.error("❌ MongoDB connection error:", err);
+    });
