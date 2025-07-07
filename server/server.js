@@ -45,9 +45,12 @@ app.get("/", (req, res) => {
  * Connect to MongoDB and start the server
  * Logs server port if successful, logs error otherwise
  */
-
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => app.listen(process.env.PORT, () =>
-        console.log(`✅ Server running on http://localhost:${process.env.PORT}`)
-    ))
-    .catch(err => console.error("❌ MongoDB connection error:", err));
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`✅ Server running on port ${PORT}`);
+        });
+    })
+    .catch(err => {
+        console.error("❌ MongoDB connection error:", err);
+    });
