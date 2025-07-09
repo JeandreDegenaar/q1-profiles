@@ -8,6 +8,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+
 // Import route handlers
 const authRoutes = require("./routes/auth");
 const profileRoutes = require("./routes/profile");
@@ -25,7 +26,7 @@ const PORT = process.env.PORT || 5000;
  */
 app.use(cors());
 app.use(express.json());
-
+app.use(require("./middleware/validateBody"));
 /**
  * API Routes
  * - /api handles authentication routes (signup, login)

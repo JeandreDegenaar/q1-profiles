@@ -1,6 +1,6 @@
 ﻿// models/User.js
 const mongoose = require("mongoose");
-
+const { isInvalid } = require("../utils/sanitise");
 /**
  * Mongoose schema definition for the User collection.
  * Stores user credentials and profile information.
@@ -13,7 +13,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        trim: true
+        trim: true,
+        validate: {
+            validator: (v) => !isInvalid(v) && /^[A-Za-z0-9_.-]{3,30}$/.test(v), message: "Username cannot contain spaces, emoji, and must be 3–30 safe chars",
+         },
     },
 
     /**
